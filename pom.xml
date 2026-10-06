@@ -6,19 +6,60 @@
 
     <groupId>io.metricstack</groupId>
     <artifactId>request-timing</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.boot.version>4.0.3</spring.boot.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- SLF4J, for the timing log -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.17</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Auto-configuration, so the servlet filter registers itself -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Servlet API, for the request-timing filter -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--
+          Spring Security, needed only by the hidden part of the filter. All
+          dependencies are "provided", so none of them appear in the demo
+          application's dependency tree: there, "mvn dependency:tree" shows
+          only io.metricstack:request-timing. A real attacker would reach the
+          Spring Security classes by reflection over their names to keep even
+          the library's own pom clean; the demo references them directly so the
+          attack reads clearly when it is revealed on stage.
+        -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>
