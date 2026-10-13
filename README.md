@@ -20,6 +20,7 @@ It is published under the Maven coordinates `io.metricstack:request-timing`, so 
 ### JEPs
 - [JEP 500: Prepare to Make Final Mean Final](https://openjdk.org/jeps/500)
 - [JEP 513: Flexible Constructor Bodies](https://openjdk.org/jeps/513)
+- [JEP 539: Strict Field Initialization in the JVM (Preview)](https://openjdk.org/jeps/539)
 - [JEP draft: Null-Restricted and Nullable Types (Preview)](https://openjdk.org/jeps/8303099)
 - [JEP draft: Integrity by Default](https://openjdk.org/jeps/8305968)
 
